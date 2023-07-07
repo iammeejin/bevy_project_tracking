@@ -1,5 +1,4 @@
-
-use bevy::{prelude::*, render::camera::ScalingMode};
+use bevy::prelude::*;
 
 fn main() {
     App::new()
@@ -9,64 +8,45 @@ fn main() {
 }
 
 
-#[derive(Component)]
-struct Position { x: f32, y: f32 }
-
-
-
-
-/// set up a simple 3D scene
+/// set up a simple scene with a "parent" cube and a "child" cube
 fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    // camera
-    commands.spawn(Camera3dBundle {
-        projection: OrthographicProjection {
-            scale: 3.0,
-            scaling_mode: ScalingMode::FixedVertical(2.0),
-            ..default()
-        }
-        .into(),
-        transform: Transform::from_xyz(5.0, 5.0, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
+    let cube_handle = meshes.add(Mesh::from(shape::Cube { size: 2.0 }));
+    let cube_material_handle = materials.add(StandardMaterial {
+        base_color: Color::rgb(0.8, 0.7, 0.6),
         ..default()
     });
 
-    // plane
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(shape::Plane::from_size(5.0).into()),
-        material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
-        ..default()
-    });
-    // cubes
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-        transform: Transform::from_xyz(1.5, 0.5, 1.5),
-        ..default()
-    });
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-        transform: Transform::from_xyz(1.5, 0.5, -1.5),
-        ..default()
-    });
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-        transform: Transform::from_xyz(-1.5, 0.5, 1.5),
-        ..default()
-    });
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
-        transform: Transform::from_xyz(-1.5, 0.5, -1.5),
-        ..default()
-    });
+    // parent cube
+    commands
+        .spawn((
+            PbrBundle {
+                mesh: cube_handle.clone(),
+                material: cube_material_handle.clone(),
+                transform: Transform::from_xyz(0.0, 0.0, 1.0),
+                ..default()
+            },
+        ))
+        .with_children(|parent| {
+            // child cube
+            parent.spawn(PbrBundle {
+                mesh: cube_handle,
+                material: cube_material_handle,
+                transform: Transform::from_xyz(0.0, 0.0, 3.0),
+                ..default()
+            });
+        });
     // light
     commands.spawn(PointLightBundle {
-        transform: Transform::from_xyz(3.0, 8.0, 5.0),
+        transform: Transform::from_xyz(4.0, 5.0, -4.0),
+        ..default()
+    });
+    // camera
+    commands.spawn(Camera3dBundle {
+        transform: Transform::from_xyz(5.0, 10.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
     });
 }
