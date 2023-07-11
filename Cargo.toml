@@ -9,3 +9,6 @@ edition = "2021"
 bevy = "0.10.1"
 rand = "0.8.5"
 bevy_mod_picking = "0.12"
+
+[workspace]
+resolver = "2"
