@@ -1,5 +1,5 @@
 [package]
-name = "my_bevy_game"
+name = "bevy_project_tracking"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,7 +8,6 @@ edition = "2021"
 [dependencies]
 bevy = "0.10.1"
 rand = "0.8.5"
-bevy_mod_picking = "0.12"
 
 [workspace]
 resolver = "2"
