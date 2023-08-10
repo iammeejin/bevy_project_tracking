@@ -1,33 +1,38 @@
 use bevy::prelude::*;
-
 use crate::main_menu::components::*;
 use crate::main_menu::styles::*;
+
 
 pub fn spawn_main_menu(
     mut commands: Commands,
     asset_server: Res<AssetServer>
-){
+) {
     build_main_menu(&mut commands, &asset_server);
 }
 
+
 pub fn despawn_main_menu(
     mut commands: Commands,
-    main_menu_query: Query<Entity, With<MainMenu>>){
-        if let Ok(main_menu_entity) = main_menu_query.get_single() {
-            commands.entity(main_menu_entity).despawn_recursive();
-        }
+    main_menu_query: Query<Entity, With<MainMenu>>
+) {
+    if let Ok(main_menu_entity) = main_menu_query.get_single() {
+        commands.entity(main_menu_entity).despawn_recursive();
     }
+}
 
 pub fn build_main_menu(
     commands: &mut Commands,
-    asset_server: &Res<AssetServer>) -> Entity {
+    asset_server: &Res<AssetServer>
+)
+    -> Entity {
         let main_menu_entity = commands.spawn(
-            (NodeBundle {
+            (
+                NodeBundle {
                 style: MAIN_MENU_STYLE,
-                background_color: Color::RED.into(),
+                background_color: Color::WHITE.into(),
                 ..default()
             },
-            MainMenu{},
+            MainMenu {},
         ))
 
         .with_children(|parent|{
@@ -39,21 +44,13 @@ pub fn build_main_menu(
                 }
             )
             .with_children(|parent|{
-                // Image 1
-                parent.spawn(
-                    ImageBundle {
-                        style: IMAGE_STYLE,
-                        image: asset_server.load("sprites/ball_blue_large.png").into(),
-                        ..default()
-                    }
-                );
                 // Text
                 parent.spawn(
                     TextBundle {
                         text: Text {
                             sections: vec!(
                                 TextSection::new(
-                                    "Bevy Project Tracking",
+                                    "Project Tracking",
                                     get_title_text_style(&asset_server),
                                 )
                             ),
@@ -63,18 +60,9 @@ pub fn build_main_menu(
                         ..default()
                     }
                 );
-
-                // Image 2
-                parent.spawn(
-                    ImageBundle {
-                        style: IMAGE_STYLE,
-                        image: asset_server.load("sprites/ball_blue_small.png").into(),
-                        ..default()
-                    }
-                );
             });
 
-            // Play Button
+            // Main Menu Button
             parent.spawn(
                 (
                     ButtonBundle {
@@ -82,7 +70,7 @@ pub fn build_main_menu(
                         background_color: NORMAL_BUTTON_COLOR.into(),
                         ..default()
                     },
-                    PlayButton {},
+                    MainMenuButton {},
                 )
             )
             .with_children(|parent|{
@@ -91,7 +79,7 @@ pub fn build_main_menu(
                         text: Text {
                             sections: vec!(
                                 TextSection::new(
-                                    "Play",
+                                    "Project List",
                                     get_button_text_style(&asset_server),
                 )),
                             alignment: TextAlignment::Center,
@@ -132,7 +120,7 @@ pub fn build_main_menu(
             });
 
         })
-        .id();
 
+        .id();
         main_menu_entity
     }

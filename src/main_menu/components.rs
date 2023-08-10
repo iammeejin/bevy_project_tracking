@@ -4,7 +4,7 @@ use bevy::prelude::Component;
 pub struct MainMenu{}
 
 #[derive(Component)]
-pub struct PlayButton{}
+pub struct MainMenuButton{}
 
 #[derive(Component)]
 pub struct QuitButton{}
