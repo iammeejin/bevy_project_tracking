@@ -18,8 +18,6 @@ pub fn interact_with_project_1_button(
     }
 }
 
-
-
 pub fn interact_with_project_2_button(
     mut button_query: Query<(&Interaction, &mut BackgroundColor,Option<&SelectedOption>),(Changed<Interaction>, With<Project2Button>),
     >,
@@ -33,6 +31,7 @@ pub fn interact_with_project_2_button(
         }
     }
 }
+
 
 pub fn interact_with_quit_button(
     mut app_exit_event_writer: EventWriter<AppExit>,
