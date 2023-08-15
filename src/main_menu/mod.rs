@@ -15,7 +15,7 @@ impl Plugin for MainMenuPlugin {
        app.add_system(spawn_main_menu.in_schedule(OnEnter(AppState::MainMenu)))
          .add_systems(
             (
-               interact_with_menu_button,
+               interact_with_project_list_button,
                interact_with_quit_button
             )
             .in_set(OnUpdate(AppState::MainMenu))

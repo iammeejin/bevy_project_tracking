@@ -2,8 +2,11 @@ use bevy::prelude::*;
 
 use systems::*;
 
-pub mod main_menu;
+mod main_menu;
+mod project_list;
+
 use main_menu::MainMenuPlugin;
+use project_list::ProjectListPlugin;
 mod systems;
 
 fn main() {
@@ -13,6 +16,7 @@ fn main() {
     .add_state::<AppState>()
     //My Plugins
     .add_plugin(MainMenuPlugin)
+    .add_plugin(ProjectListPlugin)
     //Startup System
     .add_startup_system(spawn_camera)
     //Systems
@@ -25,4 +29,5 @@ fn main() {
 pub enum AppState {
     #[default]
     MainMenu,
+    ProjectList,
 }

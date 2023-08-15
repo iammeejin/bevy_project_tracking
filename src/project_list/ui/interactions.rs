@@ -2,11 +2,25 @@ use bevy::prelude::*;
 use bevy::app::AppExit;
 
 use crate::AppState;
-use crate::main_menu::components::*;
-use crate::main_menu::styles::*;
+use crate::project_list::components::*;
+use crate::project_list::styles::*;
 
-pub fn interact_with_project_list_button(
-    mut button_query: Query<(&Interaction, &mut BackgroundColor),(Changed<Interaction>, With<ProjectListButton>),
+pub fn interact_with_project_1_button(
+    mut button_query: Query<(&Interaction, &mut BackgroundColor,Option<&SelectedOption>),(Changed<Interaction>, With<Project1Button>),
+    >,
+) {
+    for (interaction, mut color, selected) in &mut button_query {
+        *color = match (*interaction, selected) {
+            (Interaction::Clicked, _) | (Interaction::None, Some(_)) => PRESSED_BUTTON_COLOR.into(),
+            (Interaction::Hovered, Some(_)) => HOVERED_PRESSED_BUTTON_COLOR.into(),
+            (Interaction::Hovered, None) => HOVERED_BUTTON_COLOR.into(),
+            (Interaction::None, None) => NORMAL_BUTTON_COLOR.into(),
+        }
+    }
+}
+
+pub fn interact_with_project_2_button(
+    mut button_query: Query<(&Interaction, &mut BackgroundColor),(Changed<Interaction>, With<Project2Button>),
     >,
     mut app_state_next_state: ResMut<NextState<AppState>>,
 ) {
@@ -14,7 +28,7 @@ pub fn interact_with_project_list_button(
         match *interaction {
             Interaction::Clicked => {
                 *background_color = PRESSED_BUTTON_COLOR.into();
-                app_state_next_state.set(AppState::ProjectList);
+                app_state_next_state.set(AppState::MainMenu);
             }
             Interaction::Hovered => {
                 *background_color = HOVERED_BUTTON_COLOR.into();
@@ -24,6 +38,7 @@ pub fn interact_with_project_list_button(
         }
     }
 }}
+
 
 pub fn interact_with_quit_button(
     mut app_exit_event_writer: EventWriter<AppExit>,
