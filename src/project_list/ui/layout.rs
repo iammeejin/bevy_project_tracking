@@ -68,11 +68,12 @@ pub fn build_project_list(
             parent.spawn(
                 (
                     ButtonBundle {
-                        style: BUTTON_STYLE,
+                        style: BUTTON_STYLE1,
                         background_color: NORMAL_BUTTON_COLOR.into(),
                         ..default()
                     },
-                    Project2Button {},
+                    Project1Button {},
+                    Revealed(true),
                 )
             )
             .with_children(|parent|{

@@ -17,6 +17,7 @@ impl Plugin for ProjectListPlugin {
              (
                interact_with_project_1_button,
                interact_with_project_2_button,
+               button_interaction,
                interact_with_quit_button,
              )
              .in_set(OnUpdate(AppState::ProjectList))

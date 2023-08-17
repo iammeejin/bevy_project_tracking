@@ -8,6 +8,10 @@ pub struct ProjectList {}
 pub struct Project1Button{}
 
 #[derive(Component)]
+pub struct Revealed(pub bool);
+
+
+#[derive(Component)]
 pub struct Project2Button{}
 
 #[derive(Component)]

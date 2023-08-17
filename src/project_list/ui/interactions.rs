@@ -23,12 +23,32 @@ pub fn interact_with_project_1_button(
                 *color = HOVERED_PRESSED_BUTTON_COLOR.into();
             }
             Interaction::Hovered => {
-                text.sections[0].value = "Click to view project 1".to_string();
+                text.sections[0].value = "Click to complete".to_string();
                 *color = HOVERED_BUTTON_COLOR.into();
             }
             Interaction::None => {
                 text.sections[0].value = "Project 1".to_string();
                 *color = NORMAL_BUTTON_COLOR.into();
+            }
+        }
+    }
+}
+
+pub fn button_interaction(
+    mut revealed_query: Query<&mut Revealed>,
+    mut button_query: Query<(&mut Style, &Project1Button, &Interaction)>,
+) {
+    for (mut style, _, interaction) in button_query.iter_mut() {
+        if interaction == &Interaction::Clicked {
+            if let Some(mut visible) = revealed_query.iter_mut().next() {
+                if !visible.0 {
+                    visible.0 = true;
+
+                    // Display the second button when the first button is clicked
+                    style.display = Display::Flex;
+                } else {
+                    style.display = Display::None;
+                }
             }
         }
     }
