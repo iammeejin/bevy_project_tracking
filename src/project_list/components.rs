@@ -19,6 +19,3 @@ pub struct MainMenuButton {}
 
 #[derive(Component)]
 pub struct QuitButton {}
-
-#[derive(Component)]
-pub struct SelectedOption {}

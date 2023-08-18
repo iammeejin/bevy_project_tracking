@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy::app::AppExit;
 
+use crate::AppState;
+
 use crate::project_list::components::*;
 use crate::project_list::styles::*;
 
@@ -44,7 +46,6 @@ pub fn button_interaction(
                 if !visible.0 {
                     visible.0 = true;
 
-                    // Display the second button when the first button is clicked
                     style.display = Display::Flex;
                 } else {
                     style.display = Display::None;
@@ -55,19 +56,57 @@ pub fn button_interaction(
 }
 
 pub fn interact_with_project_2_button(
-    mut button_query: Query<(&Interaction, &mut BackgroundColor,Option<&SelectedOption>),(Changed<Interaction>, With<Project2Button>),
+    mut button_query: Query<
+        (
+            &Interaction,
+            &mut BackgroundColor,
+            &Children,
+        ),
+        (Changed<Interaction>, With<Project2Button>),
     >,
+    mut text_query: Query<&mut Text>,
 ) {
-    for (interaction, mut color, selected) in &mut button_query {
-        *color = match (*interaction, selected) {
-            (Interaction::Clicked, _) | (Interaction::None, Some(_)) => PRESSED_BUTTON_COLOR.into(),
-            (Interaction::Hovered, Some(_)) => HOVERED_PRESSED_BUTTON_COLOR.into(),
-            (Interaction::Hovered, None) => HOVERED_BUTTON_COLOR.into(),
-            (Interaction::None, None) => NORMAL_BUTTON_COLOR.into(),
+    for (interaction, mut color, children) in &mut button_query {
+        let mut text = text_query.get_mut(children[0]).unwrap();
+        match *interaction {
+            Interaction::Clicked => {
+                text.sections[0].value = "Project 2 soon to be added".to_string();
+                *color = HOVERED_PRESSED_BUTTON_COLOR.into();
+            }
+            Interaction::Hovered => {
+                text.sections[0].value = "Click to complete".to_string();
+                *color = HOVERED_BUTTON_COLOR.into();
+            }
+            Interaction::None => {
+                text.sections[0].value = "Project 2".to_string();
+                *color = NORMAL_BUTTON_COLOR.into();
+            }
         }
     }
 }
 
+pub fn interact_with_main_menu_button(
+    mut button_query: Query<
+        (&Interaction, &mut BackgroundColor),
+        (Changed<Interaction>, With<MainMenuButton>)
+    >,
+    mut app_state_next_state: ResMut<NextState<AppState>>
+) {
+    if let Ok((interaction, mut background_color)) = button_query.get_single_mut() {
+        match *interaction {
+            Interaction::Clicked => {
+                *background_color = PRESSED_BUTTON_COLOR.into();
+                app_state_next_state.set(AppState::MainMenu);
+            }
+            Interaction::Hovered => {
+                *background_color = HOVERED_BUTTON_COLOR.into();
+            }
+            Interaction::None => {
+                *background_color = NORMAL_BUTTON_COLOR.into();
+            }
+        }
+    }
+}
 
 pub fn interact_with_quit_button(
     mut app_exit_event_writer: EventWriter<AppExit>,

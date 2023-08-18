@@ -22,13 +22,6 @@ pub const BUTTON_STYLE: Style = Style {
     ..Style::DEFAULT
 };
 
-pub const BUTTON_STYLE1: Style = Style {
-    justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Px(350.0), Val::Px(80.0)),
-    display: Display::None,
-    ..Style::DEFAULT
-};
 
 pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
     TextStyle {
