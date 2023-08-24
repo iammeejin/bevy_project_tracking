@@ -16,6 +16,7 @@ impl Plugin for MainMenuPlugin {
          .add_systems(
             (
                interact_with_project_list_button,
+               interact_with_visibility_test_button,
                interact_with_quit_button
             )
             .in_set(OnUpdate(AppState::MainMenu))

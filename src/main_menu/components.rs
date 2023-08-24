@@ -7,4 +7,7 @@ pub struct MainMenu{}
 pub struct ProjectListButton{}
 
 #[derive(Component)]
+pub struct VisibilityTestButton{}
+
+#[derive(Component)]
 pub struct QuitButton{}
