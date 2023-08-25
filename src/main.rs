@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy::winit::WinitSettings;
+
 
 use systems::*;
 
@@ -12,8 +12,6 @@ mod systems;
 
 fn main() {
     App::new()
-    //Resource
-    .insert_resource(WinitSettings::desktop_app())
     //Bevy Plugins
     .add_plugins(DefaultPlugins)
     .add_state::<AppState>()
