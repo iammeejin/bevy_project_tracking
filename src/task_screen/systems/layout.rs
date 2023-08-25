@@ -1,70 +1,68 @@
 use bevy::prelude::*;
-use crate::project_list::components::*;
-use crate::project_list::styles::*;
+use crate::task_screen::components::*;
+use crate::task_screen::styles::*;
 
 
-pub fn spawn_project_list(
+pub fn spawn_task_screen(
     mut commands: Commands,
     asset_server: Res<AssetServer>
 ) {
-    build_project_list(&mut commands, &asset_server);
+    build_task_screen(&mut commands, &asset_server);
 }
 
 
-pub fn despawn_project_list(
+pub fn despawn_task_screen(
     mut commands: Commands,
-    project_list_query: Query<Entity, With<ProjectList>>
+    task_screen_query: Query<Entity, With<TaskScreen>>
 ) {
-    if let Ok(project_list_entity) = project_list_query.get_single() {
-        commands.entity(project_list_entity).despawn_recursive();
+    if let Ok(task_screen_entity) = task_screen_query.get_single() {
+        commands.entity(task_screen_entity).despawn_recursive();
     }
 }
 
-pub fn build_project_list(
+pub fn build_task_screen(
     commands: &mut Commands,
     asset_server: &Res<AssetServer>
 )
     -> Entity {
-        let project_list_entity = commands.spawn(
+        let task_screen_entity = commands.spawn(
             (
                 NodeBundle {
-                style: PROJECT_LIST_STYLE,
-                background_color: Color::CRIMSON.into(),
+                style: TASK_SCREEN_STYLE,
+                background_color: Color::GRAY.into(),
                 ..default()
             },
-            ProjectList {},
+            TaskScreen {},
         ))
 
         .with_children(|parent|{
-            // Project 1 Button
-            parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
+            // Header
+            parent
+                .spawn(NodeBundle {
+                    style: Style {
+                        padding: UiRect::all(Val::Px(6.0)),
                         ..default()
                     },
-                    Project1Button {},
-                )
-            )
-            .with_children(|parent|{
-                parent.spawn(
-                    TextBundle {
-                        text: Text {
-                            sections: vec!(
-                                TextSection::new(
-                                    "Project 1",
-                                    get_button_text_style(&asset_server),
-                )),
-                            alignment: TextAlignment::Center,
+                    ..default()
+                })
+                .with_children(|parent| {
+                    parent.spawn(
+                        TextBundle {
+                            text: Text {
+                                sections: vec!(
+                                    TextSection::new(
+                                        "Task Screen",
+                                        get_button_text_style(&asset_server),
+                    )),
+                                alignment: TextAlignment::Center,
+                                ..default()
+                            },
                             ..default()
-                        },
-                        ..default()
-                    }
-                );
-            });
-
-            // Project 2 Button
+                        }
+                    );
+                });
+            
+            // Mark as Completed Button
             parent.spawn(
                 (
                     ButtonBundle {
@@ -72,8 +70,7 @@ pub fn build_project_list(
                         background_color: NORMAL_BUTTON_COLOR.into(),
                         ..default()
                     },
-                    Project2Button {},
-                    Revealed(true),
+                    Task1CompletedButton {},
                 )
             )
             .with_children(|parent|{
@@ -82,36 +79,7 @@ pub fn build_project_list(
                         text: Text {
                             sections: vec!(
                                 TextSection::new(
-                                    "Project 2",
-                                    get_button_text_style(&asset_server),
-                )),
-                            alignment: TextAlignment::Center,
-                            ..default()
-                        },
-                        ..default()
-                    }
-                );
-            });
-
-            // Project 3 Button
-            parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
-                        ..default()
-                    },
-                    Project3Button {},
-                    Revealed(true),
-                )
-            )
-            .with_children(|parent|{
-                parent.spawn(
-                    TextBundle {
-                        text: Text {
-                            sections: vec!(
-                                TextSection::new(
-                                    "Project 3",
+                                    "Task Completed",
                                     get_button_text_style(&asset_server),
                 )),
                             alignment: TextAlignment::Center,
@@ -123,7 +91,7 @@ pub fn build_project_list(
             });
 
 
-            // Project 4 Button
+            // Project List Button
             parent.spawn(
                 (
                     ButtonBundle {
@@ -131,8 +99,7 @@ pub fn build_project_list(
                         background_color: NORMAL_BUTTON_COLOR.into(),
                         ..default()
                     },
-                    Project4Button {},
-                    Revealed(true),
+                    ProjectListButton {},
                 )
             )
             .with_children(|parent|{
@@ -141,7 +108,7 @@ pub fn build_project_list(
                         text: Text {
                             sections: vec!(
                                 TextSection::new(
-                                    "Project 4",
+                                    "Project List",
                                     get_button_text_style(&asset_server),
                 )),
                             alignment: TextAlignment::Center,
@@ -152,9 +119,8 @@ pub fn build_project_list(
                 );
             });
 
-
-            //Main Menu Button
-            parent.spawn(
+             //Main Menu Button
+             parent.spawn(
                 (
                     ButtonBundle {
                         style: BUTTON_STYLE,
@@ -178,7 +144,6 @@ pub fn build_project_list(
                         }
                     );
                 });
-
 
             // Quit Button
             parent.spawn(
@@ -212,7 +177,5 @@ pub fn build_project_list(
         })
 
         .id();
-        project_list_entity
+        task_screen_entity
     }
-
-

@@ -16,16 +16,17 @@ pub fn interact_with_project_1_button(
         (Changed<Interaction>, With<Project1Button>),
     >,
     mut text_query: Query<&mut Text>,
+    mut app_state_next_state: ResMut<NextState<AppState>>,
 ) {
     for (interaction, mut color, children) in &mut button_query {
         let mut text = text_query.get_mut(children[0]).unwrap();
         match *interaction {
             Interaction::Clicked => {
-                text.sections[0].value = "Project 1 soon to be added".to_string();
                 *color = HOVERED_PRESSED_BUTTON_COLOR.into();
+                app_state_next_state.set(AppState::TaskScreen);
             }
             Interaction::Hovered => {
-                text.sections[0].value = "Click to complete".to_string();
+                text.sections[0].value = "Click to view Project 1".to_string();
                 *color = HOVERED_BUTTON_COLOR.into();
             }
             Interaction::None => {
@@ -36,24 +37,7 @@ pub fn interact_with_project_1_button(
     }
 }
 
-pub fn button_interaction(
-    mut revealed_query: Query<&mut Revealed>,
-    mut button_query: Query<(&mut Style, &Project1Button, &Interaction)>,
-) {
-    for (mut style, _, interaction) in button_query.iter_mut() {
-        if interaction == &Interaction::Clicked {
-            if let Some(mut visible) = revealed_query.iter_mut().next() {
-                if !visible.0 {
-                    visible.0 = true;
 
-                    style.display = Display::Flex;
-                } else {
-                    style.display = Display::None;
-                }
-            }
-        }
-    }
-}
 
 pub fn interact_with_project_2_button(
     mut button_query: Query<
@@ -74,11 +58,90 @@ pub fn interact_with_project_2_button(
                 *color = HOVERED_PRESSED_BUTTON_COLOR.into();
             }
             Interaction::Hovered => {
-                text.sections[0].value = "Click to complete".to_string();
+                text.sections[0].value = "Click to view Project 2".to_string();
                 *color = HOVERED_BUTTON_COLOR.into();
             }
             Interaction::None => {
                 text.sections[0].value = "Project 2".to_string();
+                *color = NORMAL_BUTTON_COLOR.into();
+            }
+        }
+    }
+}
+
+pub fn interact_with_project_3_button(
+    mut button_query: Query<
+        (
+            &Interaction,
+            &mut BackgroundColor,
+            &Children,
+        ),
+        (Changed<Interaction>, With<Project3Button>),
+    >,
+    mut text_query: Query<&mut Text>,
+) {
+    for (interaction, mut color, children) in &mut button_query {
+        let mut text = text_query.get_mut(children[0]).unwrap();
+        match *interaction {
+            Interaction::Clicked => {
+                text.sections[0].value = "Project 3 soon to be added".to_string();
+                *color = HOVERED_PRESSED_BUTTON_COLOR.into();
+            }
+            Interaction::Hovered => {
+                text.sections[0].value = "Click to complete".to_string();
+                *color = HOVERED_BUTTON_COLOR.into();
+            }
+            Interaction::None => {
+                text.sections[0].value = "Project 3".to_string();
+                *color = NORMAL_BUTTON_COLOR.into();
+            }
+        }
+    }
+}
+
+pub fn button_interaction(
+    mut revealed_query: Query<&mut Revealed>,
+    mut button_query: Query<(&mut Style, &Project3Button, &Interaction)>,
+) {
+    for (mut style, _, interaction) in button_query.iter_mut() {
+        if interaction == &Interaction::Clicked {
+            if let Some(mut visible) = revealed_query.iter_mut().next() {
+                if !visible.0 {
+                    visible.0 = true;
+
+                    style.display = Display::Flex;
+                } else {
+                    style.display = Display::None;
+                }
+            }
+        }
+    }
+}
+
+pub fn interact_with_project_4_button(
+    mut button_query: Query<
+        (
+            &Interaction,
+            &mut BackgroundColor,
+            &Children,
+        ),
+        (Changed<Interaction>, With<Project4Button>),
+    >,
+    mut text_query: Query<&mut Text>,
+) {
+    for (interaction, mut color, children) in &mut button_query {
+        let mut text = text_query.get_mut(children[0]).unwrap();
+        match *interaction {
+            Interaction::Clicked => {
+                text.sections[0].value = "Project 4 soon to be added".to_string();
+                *color = HOVERED_PRESSED_BUTTON_COLOR.into();
+            }
+            Interaction::Hovered => {
+                text.sections[0].value = "Click to view Project 4".to_string();
+                *color = HOVERED_BUTTON_COLOR.into();
+            }
+            Interaction::None => {
+                text.sections[0].value = "Project 4".to_string();
                 *color = NORMAL_BUTTON_COLOR.into();
             }
         }

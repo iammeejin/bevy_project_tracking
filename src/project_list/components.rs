@@ -15,6 +15,12 @@ pub struct Revealed(pub bool);
 pub struct Project2Button{}
 
 #[derive(Component)]
+pub struct Project3Button{}
+
+#[derive(Component)]
+pub struct Project4Button{}
+
+#[derive(Component)]
 pub struct MainMenuButton {}
 
 #[derive(Component)]

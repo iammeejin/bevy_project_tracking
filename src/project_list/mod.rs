@@ -17,6 +17,8 @@ impl Plugin for ProjectListPlugin {
              (
                interact_with_project_1_button,
                interact_with_project_2_button,
+               interact_with_project_3_button,
+               interact_with_project_4_button,
                button_interaction,
                interact_with_main_menu_button,
                interact_with_quit_button,

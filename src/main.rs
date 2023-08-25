@@ -5,9 +5,11 @@ use systems::*;
 
 mod main_menu;
 mod project_list;
+mod task_screen;
 
 use main_menu::MainMenuPlugin;
 use project_list::ProjectListPlugin;
+use task_screen::TaskScreenPlugin;
 mod systems;
 
 fn main() {
@@ -18,6 +20,7 @@ fn main() {
     //My Plugins
     .add_plugin(MainMenuPlugin)
     .add_plugin(ProjectListPlugin)
+    .add_plugin(TaskScreenPlugin)
     //Startup System
     .add_startup_system(spawn_camera)
     //Systems
@@ -31,4 +34,5 @@ pub enum AppState {
     #[default]
     MainMenu,
     ProjectList,
+    TaskScreen,
 }
