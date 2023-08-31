@@ -61,6 +61,7 @@ pub fn build_task_screen(
                         }
                     );
                 });
+                    
             
             // Mark as Completed Button
             parent.spawn(

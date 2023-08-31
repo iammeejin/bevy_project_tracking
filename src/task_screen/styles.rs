@@ -7,18 +7,22 @@ pub const PRESSED_BUTTON_COLOR: Color = Color::rgb(0.35, 0.75, 0.35);
 
 
 pub const TASK_SCREEN_STYLE: Style = Style {
-    justify_content: JustifyContent::SpaceBetween,
+    flex_direction: FlexDirection::Column,
+    justify_content: JustifyContent::Center,
+    align_items: AlignItems::Center,
     size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
     gap: Size::new(Val::Px(8.0), Val::Px(8.0)),
     ..Style::DEFAULT
 };
 
 pub const BUTTON_STYLE: Style = Style {
+    flex_direction: FlexDirection::Column,
     justify_content: JustifyContent::Center,
     align_items: AlignItems::Center,
-    size: Size::new(Val::Px(250.0), Val::Px(70.0)),
+    size: Size::new(Val::Px(400.0), Val::Px(80.0)),
     ..Style::DEFAULT
 };
+
 
 
 pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {

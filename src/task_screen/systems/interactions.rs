@@ -24,7 +24,7 @@ pub fn interact_with_task_1_completed_button(mut button_query: Query<
             app_state_next_state.set(AppState::ProjectList);
         }
         Interaction::Hovered => {
-            text.sections[0].value = "Click here if Task is Completed".to_string();
+            text.sections[0].value = "Click here if task is Completed".to_string();
             *color = HOVERED_BUTTON_COLOR.into();
         }
         Interaction::None => {
