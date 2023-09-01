@@ -35,146 +35,73 @@ pub fn build_task_screen(
             TaskScreen {},
         ))
 
-        .with_children(|parent|{
-            // Header
+        .with_children(|parent| {
+            // left vertical fill (border)
             parent
                 .spawn(NodeBundle {
                     style: Style {
-                        padding: UiRect::all(Val::Px(6.0)),
+                        size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
+                        border: UiRect::all(Val::Px(2.)),
                         ..default()
                     },
+                    background_color: Color::rgb(0.65, 0.65, 0.65).into(),
                     ..default()
                 })
                 .with_children(|parent| {
-                    parent.spawn(
-                        TextBundle {
-                            text: Text {
-                                sections: vec!(
-                                    TextSection::new(
-                                        "Task Screen",
-                                        get_button_text_style(&asset_server),
-                    )),
-                                alignment: TextAlignment::Center,
+                    // left vertical fill (content)
+                    parent
+                        .spawn(NodeBundle {
+                            style: Style {
+                                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
                                 ..default()
                             },
+                            background_color: Color::rgb(0.15, 0.15, 0.15).into(),
                             ..default()
-                        }
-                    );
-                });
-                    
-            
-            // Mark as Completed Button
-            parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
-                        ..default()
-                    },
-                    Task1CompletedButton {},
-                )
-            )
-            .with_children(|parent|{
-                parent.spawn(
-                    TextBundle {
-                        text: Text {
-                            sections: vec!(
-                                TextSection::new(
-                                    "Task Completed",
-                                    get_button_text_style(&asset_server),
-                )),
-                            alignment: TextAlignment::Center,
-                            ..default()
-                        },
-                        ..default()
-                    }
-                );
-            });
-
-
-            // Project List Button
-            parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
-                        ..default()
-                    },
-                    ProjectListButton {},
-                )
-            )
-            .with_children(|parent|{
-                parent.spawn(
-                    TextBundle {
-                        text: Text {
-                            sections: vec!(
-                                TextSection::new(
-                                    "Project List",
-                                    get_button_text_style(&asset_server),
-                )),
-                            alignment: TextAlignment::Center,
-                            ..default()
-                        },
-                        ..default()
-                    }
-                );
-            });
-
-             //Main Menu Button
-             parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
-                        ..default()
-                    },
-                    MainMenuButton {}
-                ))
-                .with_children(|parent| {
-                    parent.spawn(
-                        TextBundle {
-                            text: Text {
-                                sections: vec![TextSection::new(
-                                    "Main Menu",
-                                    get_button_text_style(&asset_server)
-                                )],
-                                alignment: TextAlignment::Center,
-                                ..default()
-                            },
-                            ..default()
-                        }
-                    );
-                });
-
-            // Quit Button
-            parent.spawn(
-                (
-                    ButtonBundle {
-                        style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
-                        ..default()
-                    },
-                    QuitButton {},
-                )
-            )
-            .with_children(|parent|{
-                parent.spawn(
-                    TextBundle {
-                        text: Text {
-                            sections: vec!(
-                                TextSection::new(
-                                    "Quit",
-                                    get_button_text_style(&asset_server),
+                        })
+                        .with_children(|parent| {
+                            // text
+                            parent.spawn(TextBundle::from_section(
+                                    "Task List",
+                                    TextStyle {
+                                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                        font_size: 30.0,
+                                        color: Color::WHITE,
+                                    },
                                 )
-                            ),
-                            alignment: TextAlignment::Center,
-                            ..default()
-                        },
+                                .with_style(Style {
+                                    margin: UiRect::all(Val::Px(5.)),
+                                    ..default()
+                                }
+                            ));
+                        });
+                });
+            // right vertical fill
+            parent
+                .spawn(NodeBundle {
+                    style: Style {
+                        flex_direction: FlexDirection::Column,
+                        justify_content: JustifyContent::Center,
+                        align_items: AlignItems::Center,
+                        size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
                         ..default()
-                    }
-                );
-            });
-
+                    },
+                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    ..default()
+                })
+                .with_children(|parent| {
+                    // Title
+                    parent.spawn(TextBundle::from_section(
+                            "Task Description Here",
+                            TextStyle {
+                                font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                font_size: 25.,
+                                color: Color::WHITE,
+                            },
+                        )
+                    );
+                });
+           
+                
         })
 
         .id();
