@@ -16,14 +16,26 @@ pub const TASK_SCREEN_STYLE: Style = Style {
 
 
 pub const BUTTON_STYLE: Style = Style {
-    flex_direction: FlexDirection::Column,
+    flex_direction: FlexDirection::Row,
     justify_content: JustifyContent::Center,
     align_items: AlignItems::Center,
     size: Size::new(Val::Px(400.0), Val::Px(80.0)),
     ..Style::DEFAULT
 };
 
+pub const LEFT_VERTICAL_BORDER_STYLE: Style = Style {
+    flex_direction: FlexDirection::Column,
+    justify_content: JustifyContent::Center,
+    align_items: AlignItems::Center,
+    size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
+    border: UiRect::all(Val::Px(2.)),
+    ..Style::DEFAULT
+};
 
+pub const RIGHT_VERTICAL_FILL_STYLE: Style = Style {
+    size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
+    ..Style::DEFAULT
+};
 
 pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
     TextStyle {
@@ -31,3 +43,5 @@ pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
         font_size: 32.0,
         color: Color::WHITE,
 }}
+
+
