@@ -23,6 +23,14 @@ pub const BUTTON_STYLE: Style = Style {
     ..Style::DEFAULT
 };
 
+pub const BUTTON_STYLE1: Style = Style {
+    flex_direction: FlexDirection::Row,
+    justify_content: JustifyContent::Center,
+    align_items: AlignItems::Center,
+    size: Size::new(Val::Px(400.0), Val::Px(400.0)),
+    ..Style::DEFAULT
+};
+
 pub const LEFT_VERTICAL_BORDER_STYLE: Style = Style {
     flex_direction: FlexDirection::Column,
     justify_content: JustifyContent::Center,
@@ -33,6 +41,9 @@ pub const LEFT_VERTICAL_BORDER_STYLE: Style = Style {
 };
 
 pub const RIGHT_VERTICAL_FILL_STYLE: Style = Style {
+    flex_direction: FlexDirection::Column,
+    justify_content: JustifyContent::Center,
+    align_items: AlignItems::Center,
     size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
     ..Style::DEFAULT
 };

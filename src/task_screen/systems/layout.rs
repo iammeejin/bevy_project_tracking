@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy::text::BreakLineOn;
 use crate::task_screen::components::*;
 use crate::task_screen::styles::*;
 
@@ -44,6 +45,34 @@ pub fn build_task_screen(
                     ..default()
                 })
                 .with_children(|parent| {
+
+                     // Task 1 Button
+                    parent.spawn(
+                        (
+                            ButtonBundle {
+                                style: BUTTON_STYLE,
+                                background_color: NORMAL_BUTTON_COLOR.into(),
+                                ..default()
+                            },
+                            Task1Button {},
+                            )
+                            )
+                                .with_children(|parent|{
+                                parent.spawn(
+                            TextBundle {
+                                text: Text {
+                                    sections: vec!(
+                                        TextSection::new(
+                                            "Task 1",
+                                            get_button_text_style(&asset_server),
+                                )),
+                                    alignment: TextAlignment::Center,
+                                    ..default()
+                                },
+                                ..default()
+                                }
+                                );
+                                });
 
                      // Project List Button
                     parent.spawn(
@@ -143,7 +172,7 @@ pub fn build_task_screen(
                         TextBundle {
                             text: Text {
                                 sections: vec![TextSection::new(
-                                    "Task Description Here",
+                                    "Task Description",
                                     get_button_text_style(&asset_server)
                                 )],
                                 alignment: TextAlignment::Center,
@@ -152,6 +181,34 @@ pub fn build_task_screen(
                             ..default()
                         }
                     );
+                    // Description Button
+                    parent.spawn(
+                        (ButtonBundle {
+                            style: BUTTON_STYLE1,
+                            background_color: NORMAL_BUTTON_COLOR.into(),
+                                ..default()
+                                },
+                                DescriptionButton {},
+                                )
+                                )
+                                .with_children(|parent|{
+                                parent.spawn(
+                            TextBundle {
+                                text: Text {
+                                    sections: vec!(
+                                        TextSection::new(
+                                            "You can check the task description in this area",
+                                            get_button_text_style(&asset_server),
+                                        )
+                                    ),
+                                    alignment: TextAlignment::Center,
+                                    linebreak_behaviour: BreakLineOn::WordBoundary,
+                                    ..default()
+                                },
+                                ..default()
+                                }
+                                );
+                                });
                 });
            
                 

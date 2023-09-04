@@ -17,6 +17,7 @@ impl Plugin for TaskScreenPlugin {
         (
             interact_with_project_list_button,
             interact_with_task_1_completed_button,
+            interact_with_task_1_button,
             interact_with_main_menu_button,
             interact_with_quit_button,
         )
