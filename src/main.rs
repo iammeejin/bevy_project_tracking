@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy::winit::WinitSettings;
 
 
 use systems::*;
@@ -17,6 +18,9 @@ fn main() {
     //Bevy Plugins
     .add_plugins(DefaultPlugins)
     .add_state::<AppState>()
+    //Resource
+    // Only run the app when there is user input. This will significantly reduce CPU/GPU use.
+    .insert_resource(WinitSettings::desktop_app())
     //My Plugins
     .add_plugin(MainMenuPlugin)
     .add_plugin(ProjectListPlugin)

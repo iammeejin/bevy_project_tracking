@@ -1,52 +1,34 @@
 use bevy::prelude::*;
 
-pub const NORMAL_BUTTON_COLOR: Color = Color::rgb(0.15, 0.15, 0.15);
-pub const HOVERED_BUTTON_COLOR: Color = Color::rgb(0.25, 0.25, 0.25);
-pub const HOVERED_PRESSED_BUTTON_COLOR: Color = Color::rgb(0.25, 0.65, 0.25);
-pub const PRESSED_BUTTON_COLOR: Color = Color::rgb(0.35, 0.75, 0.35);
+pub const PALETTE: [&str; 4] = ["27496D", "466B7A", "669DB3", "ADCBE3"];
+
 
 
 pub const TASK_SCREEN_STYLE: Style = Style {
-    justify_content: JustifyContent::Center,
+    flex_direction: FlexDirection::Column,
+    flex_basis: Val::Percent(100.),
     align_items: AlignItems::Center,
+    justify_content: JustifyContent::SpaceEvenly,
+    ..Style::DEFAULT
+};
+
+pub const TASK_SCREEN_STYLE1: Style = Style {
     size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
-    gap: Size::new(Val::Px(8.0), Val::Px(8.0)),
     ..Style::DEFAULT
 };
 
-
-pub const BUTTON_STYLE: Style = Style {
-    flex_direction: FlexDirection::Row,
+pub const LEFT_PANEL_STYLE: Style = Style {
+    size: Size::new(Val::Percent(50.0), Val::Px(520.0)),
     justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Px(400.0), Val::Px(80.0)),
     ..Style::DEFAULT
 };
 
-pub const BUTTON_STYLE1: Style = Style {
-    flex_direction: FlexDirection::Row,
+pub const RIGHT_PANEL_STYLE: Style = Style {
+    size: Size::new(Val::Percent(50.0), Val::Px(520.0)),
     justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Px(400.0), Val::Px(400.0)),
     ..Style::DEFAULT
 };
 
-pub const LEFT_VERTICAL_BORDER_STYLE: Style = Style {
-    flex_direction: FlexDirection::Column,
-    justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
-    border: UiRect::all(Val::Px(2.)),
-    ..Style::DEFAULT
-};
-
-pub const RIGHT_VERTICAL_FILL_STYLE: Style = Style {
-    flex_direction: FlexDirection::Column,
-    justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Percent(50.0), Val::Percent(100.0)),
-    ..Style::DEFAULT
-};
 
 pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
     TextStyle {
