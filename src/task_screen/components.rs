@@ -15,6 +15,9 @@ pub struct QuitButton{}
 #[derive(Component)]
 pub struct Task1Button{}
 
+#[derive(Component)]
+pub struct Task2Button{}
+
 
 #[derive(Component)]
 pub struct Task1CompletedButton{}

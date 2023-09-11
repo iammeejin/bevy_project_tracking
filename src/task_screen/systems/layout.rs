@@ -68,6 +68,34 @@ pub fn build_task_screen(
                                 );
                                 });
 
+                    // Task 2 Button
+                    parent.spawn(
+                        (
+                            ButtonBundle {
+                                style: BUTTON_STYLE,
+                                background_color: NORMAL_BUTTON_COLOR.into(),
+                                ..default()
+                            },
+                            Task2Button {},
+                            )
+                            )
+                                .with_children(|parent|{
+                                parent.spawn(
+                            TextBundle {
+                                text: Text {
+                                    sections: vec!(
+                                        TextSection::new(
+                                            "Task 2",
+                                            get_button_text_style(&asset_server),
+                                )),
+                                    alignment: TextAlignment::Center,
+                                    ..default()
+                                },
+                                ..default()
+                                }
+                                );
+                                });
+
                      // Project List Button
                     parent.spawn(
                 (
