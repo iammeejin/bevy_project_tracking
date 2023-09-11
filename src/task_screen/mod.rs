@@ -14,11 +14,12 @@ impl Plugin for TaskScreenPlugin {
        .add_systems(
         (
             interact_with_project_list_button,
-            interact_with_task_1_completed_button,
             interact_with_task_1_button,
-            button_interaction,
+            interact_with_task_1_completed_button,
+            task_1_button_interaction,
             interact_with_main_menu_button,
             interact_with_quit_button,
+            task_1_completed_button_interaction,
         )
         .in_set(OnUpdate(AppState::TaskScreen))
      )
