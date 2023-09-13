@@ -118,35 +118,29 @@ pub fn button_interaction(
     }
 }
 
-pub fn interact_with_project_4_button(
+pub fn interact_with_graph_button(
     mut button_query: Query<
-        (
-            &Interaction,
-            &mut BackgroundColor,
-            &Children,
-        ),
-        (Changed<Interaction>, With<Project4Button>),
+        (&Interaction, &mut BackgroundColor),
+        (Changed<Interaction>, With<GraphButton>)
     >,
-    mut text_query: Query<&mut Text>,
+    mut app_state_next_state: ResMut<NextState<AppState>>
 ) {
-    for (interaction, mut color, children) in &mut button_query {
-        let mut text = text_query.get_mut(children[0]).unwrap();
+    if let Ok((interaction, mut background_color)) = button_query.get_single_mut() {
         match *interaction {
             Interaction::Clicked => {
-                text.sections[0].value = "Project 4 soon to be added".to_string();
-                *color = HOVERED_PRESSED_BUTTON_COLOR.into();
+                *background_color = PRESSED_BUTTON_COLOR.into();
+                app_state_next_state.set(AppState::Graph);
             }
             Interaction::Hovered => {
-                text.sections[0].value = "Click to view Project 4".to_string();
-                *color = HOVERED_BUTTON_COLOR.into();
+                *background_color = HOVERED_BUTTON_COLOR.into();
             }
             Interaction::None => {
-                text.sections[0].value = "Project 4".to_string();
-                *color = NORMAL_BUTTON_COLOR.into();
+                *background_color = NORMAL_BUTTON_COLOR.into();
             }
         }
     }
 }
+
 
 pub fn interact_with_main_menu_button(
     mut button_query: Query<

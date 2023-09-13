@@ -123,7 +123,7 @@ pub fn build_project_list(
             });
 
 
-            // Project 4 Button
+            // Graph Button
             parent.spawn(
                 (
                     ButtonBundle {
@@ -131,8 +131,7 @@ pub fn build_project_list(
                         background_color: NORMAL_BUTTON_COLOR.into(),
                         ..default()
                     },
-                    Project4Button {},
-                    Revealed(true),
+                    GraphButton {},
                 )
             )
             .with_children(|parent|{
@@ -141,7 +140,7 @@ pub fn build_project_list(
                         text: Text {
                             sections: vec!(
                                 TextSection::new(
-                                    "Project 4",
+                                    "Graph",
                                     get_button_text_style(&asset_server),
                 )),
                             alignment: TextAlignment::Center,

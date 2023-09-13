@@ -18,7 +18,7 @@ pub struct Project2Button{}
 pub struct Project3Button{}
 
 #[derive(Component)]
-pub struct Project4Button{}
+pub struct GraphButton{}
 
 #[derive(Component)]
 pub struct MainMenuButton {}
