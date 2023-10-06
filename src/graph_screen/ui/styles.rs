@@ -32,14 +32,6 @@ pub const LEFT_VERTICAL_BORDER_STYLE: Style = Style {
     ..Style::DEFAULT
 };
 
-pub const RIGHT_VERTICAL_FILL_STYLE: Style = Style {
-    flex_direction: FlexDirection::Column,
-    justify_content: JustifyContent::Center,
-    align_items: AlignItems::Center,
-    size: Size::new(Val::Percent(70.0), Val::Percent(100.0)),
-    gap: Size::new(Val::Px(8.0), Val::Px(8.0)),
-    ..Style::DEFAULT
-};
 
 pub fn get_button_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
     TextStyle {

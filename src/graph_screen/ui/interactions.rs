@@ -3,8 +3,8 @@ use bevy::app::AppExit;
 
 use crate::AppState;
 
-use crate::graph_screen::components::*;
-use crate::graph_screen::styles::*;
+use crate::graph_screen::ui::components::*;
+use crate::graph_screen::ui::styles::*;
 
 pub fn interact_with_project_list_button(
     mut button_query: Query<(&Interaction, &mut BackgroundColor),(Changed<Interaction>, With<ProjectListButton>),

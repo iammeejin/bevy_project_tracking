@@ -1,6 +1,6 @@
 use bevy::prelude::*;
-use crate::graph_screen::components::*;
-use crate::graph_screen::styles::*;
+use crate::graph_screen::ui::components::*;
+use crate::graph_screen::ui::styles::*;
 
 
 pub fn spawn_graph(
@@ -39,7 +39,7 @@ pub fn build_graph_screen(
             parent
                 .spawn(NodeBundle {
                     style: LEFT_VERTICAL_BORDER_STYLE,
-                    background_color: Color::BLACK.into(),
+                    background_color: Color::GRAY.into(),
                     ..default()
                 })
                 .with_children(|parent| {
@@ -126,35 +126,10 @@ pub fn build_graph_screen(
                         );
                         });
                 });
-            
-            // right vertical fill
-            parent
-                .spawn(NodeBundle {
-                    style: RIGHT_VERTICAL_FILL_STYLE,
-                    background_color: Color::BLACK.into(),
-                    ..default()
-                }
-                )
-                .with_children(|parent| {
-                    // Title
-                    parent.spawn(
-                        TextBundle {
-                            text: Text {
-                                sections: vec![TextSection::new(
-                                    "Graph",
-                                    get_button_text_style(&asset_server)
-                                )],
-                                alignment: TextAlignment::Center,
-                                ..default()
-                            },
-
-                            ..default()
-                        }
-                    );
-                });
-
 
         })
         .id();
     graph_screen_entity
     }
+
+    
